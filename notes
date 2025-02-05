@@ -111,3 +111,8 @@ Docker creates a set of namespaces for that container.
 
 These namespaces provide a layer of isolation. Each aspect of a container runs in a separate namespace and its access is 
 limited to that namespace.
+
+Run your first container
+
+docker run -d -p 8080:80 docker/welcome-to-docker
+
