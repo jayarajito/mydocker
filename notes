@@ -116,3 +116,7 @@ Run your first container
 
 docker run -d -p 8080:80 docker/welcome-to-docker
 
+Start the project
+
+git clone https://github.com/docker/getting-started-todo-app
+
