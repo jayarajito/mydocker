@@ -119,4 +119,9 @@ docker run -d -p 8080:80 docker/welcome-to-docker
 Start the project
 
 git clone https://github.com/docker/getting-started-todo-app
+cd getting-started-todo-app
+docker compose watch
+
+netstat -ano | findstr :8080
+taskkill /PID 2660 /F
 
