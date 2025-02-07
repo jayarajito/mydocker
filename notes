@@ -119,7 +119,9 @@ docker run -d -p 8080:80 docker/welcome-to-docker
 Start the project
 
 git clone https://github.com/docker/getting-started-todo-app
+
 cd getting-started-todo-app
+
 docker compose watch
 
 netstat -ano | findstr :8080
@@ -152,3 +154,42 @@ docker system prune
 To additionally remove any stopped containers and all unused images (not just dangling images), add the -a flag to the command:
 
 docker system prune -a
+
+
+A Dockerfile describes how to build a Docker image, while Docker Compose is a tool that runs Docker containers. 
+Dockerfile
+A text document that contains commands to build a Docker image 
+Each instruction in a Dockerfile creates a layer 
+Dockerfiles can be used to build Docker images with detailed customization options 
+Docker Compose 
+A tool that defines and runs multi-container Docker applications
+Uses a YAML file to configure an application's services
+Streamlines the management of multi-container applications
+How they work together 
+A Docker-compose.yml file can specify a build context that includes a Dockerfile
+This allows Docker Compose to build the image as part of the service's configuration
+Examples of Dockerfile instructions 
+FROM: Creates a layer from a Docker image
+COPY: Adds files from the Docker client's current directory
+RUN: Builds an application with make
+CMD: Specifies what command to run within the container
+
+
+A Dockerfile is a text-based script that provides the instruction set on how to build the image.
+
+git clone https://github.com/docker/getting-started-todo-app
+
+cd getting-started-todo-app
+
+
+Build the project by running the following command, swapping out DOCKER_USERNAME with your username.
+
+docker build -t <DOCKER_USERNAME>/getting-started-todo-app .
+
+To verify the image exists locally, you can use the docker image ls command:
+
+docker image ls
+
+To push the image, use the docker push command. Be sure to replace DOCKER_USERNAME with your username:
+
+docker push <DOCKER_USERNAME>/getting-started-todo-app
