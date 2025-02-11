@@ -196,6 +196,25 @@ docker push <DOCKER_USERNAME>/getting-started-todo-app
 
 docker run -d -p 8080:80 docker/welcome-to-docker
 
+
+What is a container?
+Simply put, containers are isolated processes for each of your app's components. Each component - the frontend React app, the Python API engine, and the database - runs in its own isolated environment, completely isolated from everything else on your machine.
+
+Here's what makes them awesome. Containers are:
+
+Self-contained. Each container has everything it needs to function with no reliance on any pre-installed dependencies on the host machine.
+Isolated. Since containers are run in isolation, they have minimal influence on the host and other containers, increasing the security of your applications.
+Independent. Each container is independently managed. Deleting one container won't affect any others.
+Portable. Containers can run anywhere! The container that runs on your development machine will work the same way in a data center or anywhere in the cloud!
+Containers versus virtual machines (VMs)
+Without getting too deep, a VM is an entire operating system with its own kernel, hardware drivers, programs, and applications. Spinning up a VM only to isolate a single application is a lot of overhead.
+
+A container is simply an isolated process with all of the files it needs to run. If you run multiple containers, they all share the same kernel, allowing you to run more applications on less infrastructure.
+
+
+
+
+
 Docker Welcome Example
 https://github.com/docker/welcome-to-docker/blob/main/Dockerfile
 
@@ -232,3 +251,91 @@ Open http://localhost:8088 in your browser to see the app running.
 docker exec -it <container_name> sh
 
 The '&&' command ensures that the second command ( cd new_directory ) only runs if the first command ( mkdir new_directory ) executes successfully.
+
+docker ps
+The docker ps command will show you only running containers. To view stopped containers, add the -a flag to list all containers: docker ps -a
+
+Stop container
+
+docker stop <the-container-id>
+
+When referencing containers by ID, you don't need to provide the full ID. You only need to provide enough of the ID to make it unique.
+docker stop a1f
+
+What is an image?
+
+A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
+
+There are two important principles of images:
+
+Images are immutable. Once an image is created, it can't be modified. You can only make a new image or add changes on top of it.
+
+Container images are composed of layers. Each layer represents a set of file system changes that add, remove, or modify files.
+
+Open a terminal and search for images using the docker search command:
+
+docker search docker/welcome-to-docker
+
+Pull the image using the docker pull command.
+
+docker pull docker/welcome-to-docker
+
+Each of line represents a different downloaded layer of the image. Remember that each layer is a set of filesystem changes and provides functionality of the image.
+List your downloaded images using the docker image ls command:
+
+docker image ls
+
+List the image's layers using the docker image history command:
+
+docker image history docker/welcome-to-docker
+
+Viewing the full command
+
+If you add the --no-trunc flag to the command, you will see the full command. Note that, since the output is in a table-like format, longer commands will cause the output to be very difficult to navigate.
+
+What is a registry?
+An image registry is a centralized location for storing and sharing your container images. It can be either public or private. Docker Hub is a public registry that anyone can use and is the default registry.
+
+While Docker Hub is a popular option, there are many other available container registries available today, including Amazon Elastic Container Registry(ECR), Azure Container Registry (ACR), and Google Container Registry (GCR). You can even run your private registry on your local system or inside your organization. For example, Harbor, JFrog Artifactory, GitLab Container registry etc.
+
+Registry vs. repository
+
+A registry is a centralized location that stores and manages container images, whereas a repository is a collection of related container images within a registry. Think of it as a folder where you organize your images based on projects. Each repository contains one or more container images.
+
+You can create one private repository and unlimited public repositories using the free version of Docker Hub.
+
+Sample
+
+Clone the GitHub repository using the following command:
+
+git clone https://github.com/dockersamples/helloworld-demo-node
+
+Navigate into the newly created directory.
+
+cd helloworld-demo-node
+
+Run the following command to build a Docker image, swapping out YOUR_DOCKER_USERNAME with your username.
+
+docker build -t <YOUR_DOCKER_USERNAME>/docker-quickstart .
+
+Make sure you include the dot (.) at the end of the docker build command. This tells Docker where to find the Dockerfile.
+
+Run the following command to list the newly created Docker image:
+
+docker images
+
+Start a container to test the image by running the following command (swap out the username with your own username):
+
+docker run -d -p 8080:8080 <YOUR_DOCKER_USERNAME>/docker-quickstart 
+
+
+Use the docker tag command to tag the Docker image. Docker tags allow you to label and version your images.
+
+docker tag <YOUR_DOCKER_USERNAME>/docker-quickstart <YOUR_DOCKER_USERNAME>/docker-quickstart:1.0 
+
+Finally, it's time to push the newly built image to your Docker Hub repository by using the docker push command:
+
+docker push <YOUR_DOCKER_USERNAME>/docker-quickstart:1.0
+
+docker tag mydockerlocal:v1.1 jayarajdevops/mydockerlocal:webver
+
