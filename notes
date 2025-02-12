@@ -360,3 +360,57 @@ You'll use a simple to-do list app built with Node.js and MySQL as a database se
 
 https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-docker-compose/
 
+Follow the instructions to run the to-do list app on your system.
+
+git clone https://github.com/dockersamples/todo-list-app 
+
+Navigate into the todo-list-app directory:
+
+cd todo-list-app
+
+Inside this directory, you'll find a file named compose.yaml. This YAML file is where all the magic happens! It defines all the services that make up your application, along with their configurations. 
+Each service specifies its image, ports, volumes, networks, and any other settings necessary for its functionality. 
+Take some time to explore the YAML file and familiarize yourself with its structure.
+
+
+Use the docker compose up command to start the application:
+
+docker compose up -d --build
+
+Two container images were downloaded from Docker Hub - node and MySQL
+A network was created for your application
+A volume was created to persist the database files between container restarts
+Two containers were started with all of their necessary config
+
+A "volume" refers to a single, accessible storage area on a computer, often with its own file system, while a "partition" is a logical division of a physical disk drive, meaning it's a distinct section of storage space on a single hard drive;
+
+Key points to remember:
+Partition:
+A physical division of a hard disk, creating separate areas for data storage. 
+Volume:
+A logical grouping of partitions, which the operating system sees as a single accessible storage space with a specific file system. 
+Example: Imagine a hard drive with three partitions; you could then create a single "volume" by combining two of those partitions, allowing the operating system to access them as one unified storage area. 
+
+A file system is a way to organize and store files on a storage device like a hard drive, USB flash drive, or solid state drive. It defines how data is accessed, organized, and stored. 
+How file systems work
+Different file systems have different characteristics. 
+Some file systems are specific to certain operating systems or devices. 
+The structure of a file system includes how files and directories are organized and stored on the physical storage device. 
+Examples of file systems
+
+FAT
+One of the oldest and simplest file systems, used in many removable storage devices. 
+NTFS
+The default file system for Windows NT-based operating systems, including Windows 11. It supports large files and partitions. 
+
+HFS
+Also known as Mac OS Standard, it was developed for use with Mac operating systems. 
+
+ext4
+The default file system for most Linux distributions. It's used in various applications, including desktops, servers, and data centers. 
+File system use cases 
+Storing information about users, software applications, or other data that are needed for running programs
+Storing pictures, videos, music, and other types of media
+
+With everything now up and running, you can open http://localhost:3000 in your browser to see the site. Feel free to add items to the list, check them off, and remove them.
+
