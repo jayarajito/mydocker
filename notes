@@ -414,3 +414,26 @@ Storing pictures, videos, music, and other types of media
 
 With everything now up and running, you can open http://localhost:3000 in your browser to see the site. Feel free to add items to the list, check them off, and remove them.
 
+
+Tear it down
+
+In the CLI, use the docker compose down command to remove everything:
+
+docker compose down
+
+Volume persistence
+
+By default, volumes aren't automatically removed when you tear down a Compose stack. The idea is that you might want the data back if you start the stack again.
+
+If you do want to remove the volumes, add the --volumes flag when running the docker compose down command:
+
+
+docker compose down --volumes
+
+
+Using the GUI for Compose stacks
+
+Note that if you remove the containers for a Compose app in the GUI, it's removing only the containers. You'll have to manually remove the network and volumes if you want to do so.
+
+https://docs.docker.com/get-started/docker-concepts/building-images/
+
