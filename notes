@@ -474,3 +474,57 @@ or build new images. To do so, you will use the docker container commit command.
 
 docker container commit -m "Add node" base-container node-base
 
+View the layers of your image using the docker image history command:
+
+docker image history node-base
+
+To prove your image has Node installed, you can start a new container using this new image:
+
+docker run node-base node -e "console.log('Hello again')"
+
+
+Now that you’re done creating your base image, you can remove that container:
+docker rm -f base-container
+
+Build an app image
+
+Now that you have a base image, you can extend that image to build additional images.
+
+Start a new container using the newly created node-base image:
+
+docker run --name=app-container -ti node-base
+
+Inside of this container, run the following command to create a Node program:
+
+echo 'console.log("Hello from an app")' > app.js
+
+
+To run this Node program, you can use the following command and see the message printed on the screen:
+
+node app.js
+
+In another terminal, run the following command to save this container’s changes as a new image:
+
+docker container commit -c "CMD node app.js" -m "Add app" app-container sample-app
+
+This command not only creates a new image named sample-app, but also adds additional configuration to the image to set the default 
+command when starting a container. In this case, you are setting it to automatically run node app.js.
+
+In a terminal outside of the container, run the following command to view the updated layers:
+
+docker image history sample-app
+
+Finally, start a new container using the brand new image. Since you specified the default command, you can use the following command:
+
+docker run sample-app
+
+Now that you’re done with your containers, you can remove them using the following command:
+
+docker rm -f app-container
+
+
+most image builds don’t use docker container commit. Instead, you’ll use a Dockerfile which automates these steps for you.
+
+Writing a Dockerfile
+https://docs.docker.com/get-started/docker-concepts/building-images/writing-a-dockerfile/
+
